@@ -117,6 +117,7 @@ resources/views/
     ├── equipo/
     └── constancias/
 
+```
 
     **Fecha de Actualización:** 21 de Noviembre, 2025
 **Versión:** 0.5.0 (MVP Funcional - Backend & Lectura de Datos)
