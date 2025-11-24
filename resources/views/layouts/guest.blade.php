@@ -14,18 +14,30 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Force Dark Mode -->
+    <script>
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+    </script>
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col items-center pt-20 sm:pt-24 bg-gray-100 dark:bg-gray-900">
-        <div>
-            <a href="/">
-                <x-application-logo class="w-86 h-86 fill-current text-gray-500" />
+    <div class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 relative">
+        <div class="absolute top-24">
+            <a href="/" class="relative flex justify-center items-center">
+                {{-- Glow Effect --}}
+                <div
+                    class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-violet-600 rounded-full blur-2xl opacity-75 animate-pulse">
+                </div>
+
+                {{-- Logo --}}
+                <x-application-logo class="relative w-48 h-48 fill-current text-gray-500" />
             </a>
         </div>
 
         <div
-            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+            class="w-full sm:max-w-md px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg z-10">
             {{ $slot }}
         </div>
     </div>

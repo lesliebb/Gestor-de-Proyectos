@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
-                '(prefers-color-scheme: dark)').matches)) {
+            '(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
@@ -31,7 +31,9 @@
         <!-- Page Heading -->
         @isset($header)
             <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div x-data="{ show: false }" x-init="setTimeout(() => show = true, 50)"
+                    class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 transition-all duration-1000 ease-out transform"
+                    :class="show ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'">
                     {{ $header }}
                 </div>
             </header>

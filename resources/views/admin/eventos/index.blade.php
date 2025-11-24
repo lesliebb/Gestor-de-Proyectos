@@ -172,7 +172,11 @@
             <!-- Event Data Injection -->
             <script>
                 const events = @json($eventos->items());
-                let currentDate = new Date();
+                
+                // Check for date parameter from URL to open calendar in specific month
+                const urlParams = new URLSearchParams(window.location.search);
+                const dateParam = urlParams.get('date');
+                let currentDate = dateParam ? new Date(dateParam) : new Date();
                 let viewMode = 'month'; // 'month' or 'year'
                 let tooltipTimeout;
 
