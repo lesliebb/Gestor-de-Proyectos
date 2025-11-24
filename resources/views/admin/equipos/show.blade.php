@@ -154,38 +154,40 @@
                                 {{ $equipo->participantes->count() }} Miembros
                             </span>
                         </div>
-                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                            <thead class="bg-white dark:bg-gray-800">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Alumno</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Rol</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                @forelse($equipo->participantes as $participante)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ $participante->user->name }}</div>
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">{{ $participante->no_control }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-50 text-blue-700 border border-blue-100 dark:bg-blue-900/50 dark:text-blue-300 dark:border-blue-800">
-                                            {{ $participante->pivot->perfil->nombre ?? 'Sin asignar' }}
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <form action="{{ route('admin.equipos.miembros.destroy', [$equipo, $participante]) }}" method="POST">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-xs font-bold uppercase" onclick="return confirm('¿Expulsar?')">Quitar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr><td colspan="3" class="px-6 py-10 text-center text-gray-500 dark:text-gray-400 italic">Sin miembros.</td></tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-white dark:bg-gray-800">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Alumno</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Rol</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                    @forelse($equipo->participantes as $participante)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ $participante->user->name }}</div>
+                                            <div class="text-xs text-gray-500 dark:text-gray-400">{{ $participante->no_control }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-50 text-blue-700 border border-blue-100 dark:bg-blue-900/50 dark:text-blue-300 dark:border-blue-800">
+                                                {{ $participante->pivot->perfil->nombre ?? 'Sin asignar' }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <form action="{{ route('admin.equipos.miembros.destroy', [$equipo, $participante]) }}" method="POST">
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-xs font-bold uppercase" onclick="return confirm('¿Expulsar?')">Quitar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr><td colspan="3" class="px-6 py-10 text-center text-gray-500 dark:text-gray-400 italic">Sin miembros.</td></tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     {{-- Proyecto Info --}}

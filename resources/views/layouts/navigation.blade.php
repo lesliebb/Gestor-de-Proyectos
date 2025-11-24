@@ -6,14 +6,15 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route(Auth::user()->getDashboardRouteName()) }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class="block h-40 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
                 <!-- Navigation Links (ESCRITORIO) -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 lg:-my-px lg:ms-10 lg:flex">
                     {{-- 1. Dashboard (Común) --}}
-                    <x-nav-link :href="route(Auth::user()->getDashboardRouteName())" :active="request()->routeIs('*.dashboard')">
+                    <x-nav-link :href="route(Auth::user()->getDashboardRouteName())"
+                        :active="request()->routeIs('*.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
@@ -28,10 +29,12 @@
                         <x-nav-link :href="route('admin.equipos.index')" :active="request()->routeIs('admin.equipos.*')">
                             {{ __('Equipos') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('admin.proyectos.index')" :active="request()->routeIs('admin.proyectos.*')">
+                        <x-nav-link :href="route('admin.proyectos.index')"
+                            :active="request()->routeIs('admin.proyectos.*')">
                             {{ __('Proyectos') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('admin.resultados.index')" :active="request()->routeIs('admin.resultados.*')">
+                        <x-nav-link :href="route('admin.resultados.index')"
+                            :active="request()->routeIs('admin.resultados.*')">
                             {{ __('Resultados') }}
                         </x-nav-link>
                     @endif
@@ -48,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden lg:flex lg:items-center lg:ms-6">
 
                 <!-- Botón de Tema (Dark/Light Mode) -->
                 <button id="theme-toggle" type="button"
@@ -94,8 +97,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Cerrar Sesión') }}
                             </x-dropdown-link>
@@ -105,7 +107,7 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
+            <div class="-me-2 flex items-center lg:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -121,16 +123,18 @@
     </div>
 
     <!-- Responsive Navigation Menu (MÓVIL) -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1">
             {{-- 1. Dashboard --}}
-            <x-responsive-nav-link :href="route(Auth::user()->getDashboardRouteName())" :active="request()->routeIs('*.dashboard')">
+            <x-responsive-nav-link :href="route(Auth::user()->getDashboardRouteName())"
+                :active="request()->routeIs('*.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
             {{-- 2. ADMIN MÓVIL --}}
             @if (Auth::user()->roles->contains('nombre', 'Admin'))
-                <x-responsive-nav-link :href="route('admin.usuarios.index')" :active="request()->routeIs('admin.usuarios.*')">
+                <x-responsive-nav-link :href="route('admin.usuarios.index')"
+                    :active="request()->routeIs('admin.usuarios.*')">
                     {{ __('Usuarios') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.eventos.index')" :active="request()->routeIs('admin.eventos.*')">
@@ -139,10 +143,12 @@
                 <x-responsive-nav-link :href="route('admin.equipos.index')" :active="request()->routeIs('admin.equipos.*')">
                     {{ __('Equipos') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.proyectos.index')" :active="request()->routeIs('admin.proyectos.*')">
+                <x-responsive-nav-link :href="route('admin.proyectos.index')"
+                    :active="request()->routeIs('admin.proyectos.*')">
                     {{ __('Proyectos') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.resultados.index')" :active="request()->routeIs('admin.resultados.*')">
+                <x-responsive-nav-link :href="route('admin.resultados.index')"
+                    :active="request()->routeIs('admin.resultados.*')">
                     {{ __('Resultados') }}
                 </x-responsive-nav-link>
             @endif
@@ -164,8 +170,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Cerrar Sesión') }}
                     </x-responsive-nav-link>
@@ -204,7 +209,7 @@
         updateIcons();
 
         // 4. Evento Click
-        themeToggleBtn.addEventListener('click', function() {
+        themeToggleBtn.addEventListener('click', function () {
             // Alternar clase en HTML
             document.documentElement.classList.toggle('dark');
 
