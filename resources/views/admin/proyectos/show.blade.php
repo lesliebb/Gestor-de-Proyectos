@@ -16,7 +16,9 @@
                 {{-- COLUMNA IZQUIERDA: Datos del Proyecto --}}
                 <div class="lg:col-span-1 space-y-6">
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">{{ $proyecto->nombre }}</h3>
+                        <a href="{{ route('admin.equipos.show', $proyecto->equipo) }}" class="block text-lg font-bold text-gray-900 dark:text-gray-100 mb-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">
+                            {{ $proyecto->nombre }}
+                        </a>
                         <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">{{ $proyecto->descripcion }}</p>
 
                         <div class="border-t dark:border-gray-700 pt-4">

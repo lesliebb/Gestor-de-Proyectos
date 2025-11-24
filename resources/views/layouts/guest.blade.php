@@ -32,7 +32,7 @@
                 </div>
 
                 {{-- Logo --}}
-                <x-application-logo class="relative w-48 h-48 fill-current text-gray-500" />
+                <x-application-logo class="relative w-64 h-64 fill-current text-gray-500" />
             </a>
         </div>
 
