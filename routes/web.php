@@ -69,6 +69,10 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->grou
 
     // Gestión Principal
     Route::resource('eventos', EventoController::class);
+    
+    // Exportación de usuarios 
+    Route::get('/usuarios/exportar', [UsuarioController::class, 'exportar'])->name('usuarios.exportar');
+    
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('equipos', AdminEquipoController::class);
     Route::resource('proyectos', ProyectoController::class);

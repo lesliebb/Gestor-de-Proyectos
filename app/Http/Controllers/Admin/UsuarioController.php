@@ -10,6 +10,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsuariosExport;
+
 
 class UsuarioController extends Controller
 {
@@ -151,5 +154,16 @@ class UsuarioController extends Controller
         $usuario->delete();
         return redirect()->route('admin.usuarios.index')
             ->with('success', 'Usuario eliminado del sistema.');
+    }
+
+    /**
+     * Exportar usuarios a Excel con filtros aplicados
+     */
+    public function exportar(Request $request)
+    {
+        return Excel::download(
+            new UsuariosExport($request->all()), 
+            'usuarios_' . date('Y-m-d_His') . '.xlsx'
+        );
     }
 }
