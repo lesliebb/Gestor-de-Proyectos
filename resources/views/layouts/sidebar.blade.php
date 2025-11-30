@@ -36,20 +36,18 @@
                             Dashboard
                         </a>
                     </li>
-
-                    {{-- 2. MENÚ ADMIN --}}
-                    @if (Auth::user()->roles->contains('nombre', 'Admin'))
-                        <li>
-                            <p class="mt-4 mb-2 ml-4 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase">Administración</p>
-                        </li>
-                        
-                        {{-- Enlaces Admin con clases condicionales limpias --}}
+                    {{-- Enlaces Admin con clases condicionales limpias --}}
                         @php
                             // CAMBIO: rounded-xl para bordes más redondos
                             $linkClass = 'group relative flex items-center gap-2.5 rounded-xl py-2 px-4 font-medium duration-300 ease-in-out text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white';
                             $activeClass = 'bg-indigo-50 text-indigo-600 dark:bg-gray-800 dark:text-white';
                         @endphp
 
+                    {{-- 2. MENÚ ADMIN --}}
+                    @if (Auth::user()->roles->contains('nombre', 'Admin'))
+                        <li>
+                            <p class="mt-4 mb-2 ml-4 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase">Administración</p>
+                        </li>
                         <li>
                             <a href="{{ route('admin.usuarios.index') }}" class="{{ $linkClass }} {{ request()->routeIs('admin.usuarios.*') ? $activeClass : '' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
