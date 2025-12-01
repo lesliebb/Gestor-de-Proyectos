@@ -11,8 +11,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @if ($equipo)
+                {{-- ... (El resto de la vista cuando el participante TIENE equipo) ... --}}
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
                     {{-- ================================================= --}}
                     {{--               COLUMNA IZQUIERDA (2/3)             --}}
                     {{-- ================================================= --}}
@@ -398,169 +398,105 @@
                     </div>
                 </div>
             @else
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <a href="{{ route('participante.equipos.create') }}"
-                        class="group relative bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300">
-                        <div
-                            class="absolute top-4 right-4 w-12 h-12 bg-indigo-50 dark:bg-indigo-900/20 rounded-full flex items-center justify-center group-hover:bg-indigo-600 transition-colors duration-300">
-                            <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400 group-hover:text-white transition-colors"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                        </div>
-                        <h3
-                            class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                            Crear un Nuevo Equipo</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 max-w-sm">Registra tu idea de proyecto,
-                            conviértete en líder y recluta a tus compañeros.</p>
-                        <span
-                            class="inline-flex items-center text-sm font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
-                            Comenzar Registro <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </span>
-                    </a>
+                {{-- ================================================= --}}
+                {{--   VISTA PARA PARTICIPANTE SIN EQUIPO (Dashboard)    --}}
+                {{-- ================================================= --}}
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    {{-- Columna Principal (Opciones para unirse/crear equipo) --}}
+                    <div class="lg:col-span-3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <a href="{{ route('participante.equipos.create') }}"
+                                class="group relative bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300">
+                                <div
+                                    class="absolute top-4 right-4 w-12 h-12 bg-indigo-50 dark:bg-indigo-900/20 rounded-full flex items-center justify-center group-hover:bg-indigo-600 transition-colors duration-300">
+                                    <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400 group-hover:text-white transition-colors"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                </div>
+                                <h3
+                                    class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                    Crear un Nuevo Equipo</h3>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 max-w-sm">Registra tu idea de
+                                    proyecto,
+                                    conviértete en líder y recluta a tus compañeros.</p>
+                                <span
+                                    class="inline-flex items-center text-sm font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
+                                    Comenzar Registro <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    </svg>
+                                </span>
+                            </a>
 
-                    <a href="{{ route('participante.equipos.join') }}"
-                        class="group relative bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300">
-                        <div
-                            class="absolute top-4 right-4 w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-full flex items-center justify-center group-hover:bg-purple-600 transition-colors duration-300">
-                            <svg class="w-6 h-6 text-purple-600 dark:text-purple-400 group-hover:text-white transition-colors"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                                </path>
-                            </svg>
+                            <a href="{{ route('participante.equipos.join') }}"
+                                class="group relative bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300">
+                                <div
+                                    class="absolute top-4 right-4 w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-full flex items-center justify-center group-hover:bg-purple-600 transition-colors duration-300">
+                                    <svg class="w-6 h-6 text-purple-600 dark:text-purple-400 group-hover:text-white transition-colors"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3
+                                    class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                    Unirme a un Equipo</h3>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 max-w-sm">Explora los equipos
+                                    existentes que buscan talento y postúlate con tu perfil.</p>
+                                <span
+                                    class="inline-flex items-center text-sm font-bold text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform">
+                                    Ver Vacantes <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    </svg>
+                                </span>
+                            </a>
                         </div>
-                        <h3
-                            class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                            Unirme a un Equipo</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 max-w-sm">Explora los equipos
-                            existentes que buscan talento y postúlate con tu perfil.</p>
-                        <span
-                            class="inline-flex items-center text-sm font-bold text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform">
-                            Ver Vacantes <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </span>
-                    </a>
+                    </div>
+
+                    {{-- Columna Lateral (Calendario de Eventos) --}}
+                    <div class="lg:col-span-1">
+                        <div
+                            class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sticky top-6">
+                            <h3 class="text-sm font-bold text-gray-800 dark:text-white mb-4">Próximos Eventos</h3>
+                            @if (isset($eventos_proximos) && $eventos_proximos->isNotEmpty())
+                                <div class="space-y-3">
+                                    @foreach ($eventos_proximos as $evento)
+                                        <div
+                                            class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-lg transition">
+                                            <div
+                                                class="flex flex-col items-center justify-center w-10 h-10 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-100 dark:border-indigo-800 flex-shrink-0">
+                                                <span
+                                                    class="text-[9px] text-indigo-600 dark:text-indigo-400 font-bold uppercase leading-none mb-0.5">{{ \Carbon\Carbon::parse($evento->fecha_inicio)->locale('es')->shortMonthName }}</span>
+                                                <span
+                                                    class="text-sm text-indigo-700 dark:text-indigo-300 font-bold leading-none">{{ \Carbon\Carbon::parse($evento->fecha_inicio)->format('d') }}</span>
+                                            </div>
+                                            <div class="overflow-hidden min-w-0">
+                                                <p class="text-sm font-bold text-gray-700 dark:text-gray-200 truncate"
+                                                    title="{{ $evento->nombre }}">
+                                                    {{ $evento->nombre }}</p>
+                                                <p class="text-[10px] text-gray-400">Cierre:
+                                                    {{ \Carbon\Carbon::parse($evento->fecha_fin)->format('d/m') }}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="text-center py-4">
+                                    <p class="text-xs text-gray-400">No hay eventos próximos.</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             @endif
         </div>
     </div>
 
-    {{-- SCRIPT GRÁFICO (BARRAS HORIZONTALES) --}}
-    @if ($equipo && $proyecto)
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Datos compartidos
-                const labels = @json($chartLabels ?? []);
-                const data = @json($chartData ?? []);
-                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-                // Colores
-                const textColor = isDark ? '#cbd5e1' : '#64748b';
-                const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
-                const barColor = 'rgba(99, 102, 241, 0.8)'; // Indigo
-
-                // 1. MINI CHART (Vista Previa - Barras horizontales)
-                const ctxMini = document.getElementById('miniChart').getContext('2d');
-                new Chart(ctxMini, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            data: data,
-                            backgroundColor: barColor,
-                            borderRadius: 3,
-                            barThickness: 6
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        indexAxis: 'y',
-                        scales: {
-                            // CORRECCIÓN: Eje X máximo 100
-                            x: {
-                                display: false,
-                                max: 100,
-                                min: 0
-                            },
-                            y: {
-                                display: false
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                enabled: false
-                            }
-                        },
-                        interaction: {
-                            mode: 'none'
-                        }
-                    }
-                });
-
-                // 2. DETAIL CHART (Dentro del Modal - Radar)
-                const ctxDetail = document.getElementById('detailChart').getContext('2d');
-                new Chart(ctxDetail, {
-                    type: 'radar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Puntaje',
-                            data: data,
-                            backgroundColor: 'rgba(99, 102, 241, 0.2)',
-                            borderColor: '#6366f1',
-                            borderWidth: 2,
-                            pointBackgroundColor: '#6366f1',
-                            pointBorderColor: '#fff'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            r: {
-                                angleLines: {
-                                    color: gridColor
-                                },
-                                grid: {
-                                    color: gridColor
-                                },
-                                pointLabels: {
-                                    color: textColor,
-                                    font: {
-                                        size: 11
-                                    }
-                                },
-                                ticks: {
-                                    display: false,
-                                    stepSize: 20
-                                }, // Pasos de 20 en 20
-                                // CORRECCIÓN: Escala Radial de 0 a 100
-                                min: 0,
-                                max: 100,
-                                suggestedMax: 100
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        }
-                    }
-                });
-            });
-        </script>
-    @endif
+   
 </x-app-layout>
