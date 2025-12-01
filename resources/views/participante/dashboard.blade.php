@@ -500,6 +500,114 @@
 
     {{-- SCRIPT GRÁFICO (BARRAS HORIZONTALES) --}}
     @if ($equipo | $proyecto)
-        {{-- ... (El mismo script de Chart.js que ya tenías) ... --}}
+    {{-- SCRIPT GRÁFICO (BARRAS HORIZONTALES) --}}
+    @if ($equipo && $proyecto)
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Datos compartidos
+                const labels = @json($chartLabels ?? []);
+                const data = @json($chartData ?? []);
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                // Colores
+                const textColor = isDark ? '#cbd5e1' : '#64748b';
+                const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
+                const barColor = 'rgba(99, 102, 241, 0.8)'; // Indigo
+
+                // 1. MINI CHART (Vista Previa - Barras horizontales)
+                const ctxMini = document.getElementById('miniChart').getContext('2d');
+                new Chart(ctxMini, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            backgroundColor: barColor,
+                            borderRadius: 3,
+                            barThickness: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            // CORRECCIÓN: Eje X máximo 100
+                            x: {
+                                display: false,
+                                max: 100,
+                                min: 0
+                            },
+                            y: {
+                                display: false
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        interaction: {
+                            mode: 'none'
+                        }
+                    }
+                });
+
+                // 2. DETAIL CHART (Dentro del Modal - Radar)
+                const ctxDetail = document.getElementById('detailChart').getContext('2d');
+                new Chart(ctxDetail, {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Puntaje',
+                            data: data,
+                            backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                            borderColor: '#6366f1',
+                            borderWidth: 2,
+                            pointBackgroundColor: '#6366f1',
+                            pointBorderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    color: gridColor
+                                },
+                                grid: {
+                                    color: gridColor
+                                },
+                                pointLabels: {
+                                    color: textColor,
+                                    font: {
+                                        size: 11
+                                    }
+                                },
+                                ticks: {
+                                    display: false,
+                                    stepSize: 20
+                                }, // Pasos de 20 en 20
+                                // CORRECCIÓN: Escala Radial de 0 a 100
+                                min: 0,
+                                max: 100,
+                                suggestedMax: 100
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    @endif
     @endif
 </x-app-layout>
