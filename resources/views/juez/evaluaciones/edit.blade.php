@@ -81,10 +81,16 @@
                                                     Peso: <span x-text="criterio.peso"></span>%
                                                 </span>
                                             </div>
-                                            <div class="text-right">
-                                                <span class="text-2xl font-black transition-all duration-75"
+                                            <div class="text-right flex items-center justify-end gap-1">
+                                                <input type="number" 
+                                                    min="0" 
+                                                    max="100" 
+                                                    x-model.number="scores[criterio.id]"
+                                                    @input="updateChart()"
+                                                    @blur="if(scores[criterio.id] < 0) scores[criterio.id] = 0; if(scores[criterio.id] > 100) scores[criterio.id] = 100; updateChart()"
+                                                    class="w-16 text-2xl font-black text-right bg-transparent border-0 border-b-2 border-transparent hover:border-gray-300 focus:border-indigo-500 focus:ring-0 transition-all duration-75 dark:text-white dark:hover:border-gray-600 dark:focus:border-indigo-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                     :style="'color: hsl(' + ((scores[criterio.id] || 0) * 1.2) + ', 80%, 45%)'"
-                                                    x-text="scores[criterio.id] || 0"></span>
+                                                />
                                                 <span class="text-sm text-gray-400 font-medium">/100</span>
                                             </div>
                                         </div>
