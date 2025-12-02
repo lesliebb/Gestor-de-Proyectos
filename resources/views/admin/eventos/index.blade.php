@@ -406,6 +406,23 @@
                         render();
                     };
 
+                    // Agregar tooltips si el día tiene eventos
+                    if (hasEvents) {
+                        const dayEvents = events.filter(e => {
+                            const eDate = new Date(e.fecha_inicio);
+                            return eDate.getDate() === day && eDate.getMonth() === monthIndex && eDate.getFullYear() === year;
+                        });
+                        
+                        // Mostrar tooltip con el primer evento del día
+                        dayCell.onmouseenter = (e) => {
+                            clearTimeout(tooltipTimeout);
+                            showTooltip(e, dayEvents[0]);
+                        };
+                        dayCell.onmouseleave = () => {
+                            tooltipTimeout = setTimeout(hideTooltip, 300);
+                        };
+                    }
+
                     miniGrid.appendChild(dayCell);
                 }
 
