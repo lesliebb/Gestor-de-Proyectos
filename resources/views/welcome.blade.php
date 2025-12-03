@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'GesPro') }}</title>
-    
+
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+
     {{-- Script Anti-Flicker para Dark Mode --}}
     <script>
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -20,23 +20,30 @@
     </script>
 </head>
 <body class="antialiased text-gray-900 dark:text-gray-100 font-sans selection:bg-indigo-500 selection:text-white overflow-x-hidden">
-    
+
     <div class="fixed inset-0 -z-10 bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
         <div class="absolute top-0 -left-4 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-10 animate-blob"></div>
         <div class="absolute top-0 -right-4 w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-10 animate-blob animation-delay-2000"></div>
         <div class="absolute -bottom-32 left-20 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-10 animate-blob animation-delay-4000"></div>
-        
+
         <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
     </div>
 
     <div class="relative min-h-screen flex flex-col justify-center items-center">
-        
+
         {{-- NAVBAR --}}
         <div class="absolute top-0 w-full p-6 flex justify-between items-center max-w-7xl mx-auto z-20">
             <div class="flex items-center gap-2">
-                <div class="bg-indigo-600 p-2 rounded-lg text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                </div>
+                {{-- SECCIÓN DEL LOGO MODIFICADA (Tamaño aumentado a w-12 h-12) --}}
+                <img src="{{ asset('images/LogoClaro.ico') }}"
+                     alt="GesPro Logo"
+                     class="w-12 h-12 object-contain block dark:hidden">
+
+                <img src="{{ asset('images/LogoOscuro.ico') }}"
+                     alt="GesPro Logo Dark"
+                     class="w-12 h-12 object-contain hidden dark:block">
+                {{-- FIN SECCIÓN DEL LOGO MODIFICADA --}}
+
                 <span class="font-bold text-xl tracking-tight dark:text-white">GesPro</span>
             </div>
 
@@ -63,12 +70,12 @@
 
         {{-- HERO SECTION --}}
         <div class="max-w-7xl mx-auto px-6 pt-20 pb-16 lg:pt-32 text-center relative z-10">
-                        
+
             <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-gray-900 dark:text-white">
                 Gestión de <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">Proyectos</span>
             </h1>
-            
+
             <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 leading-relaxed">
                 Centraliza eventos, forma equipos multidisciplinarios y evalúa resultados en tiempo real. La herramienta definitiva para docentes y estudiantes.
             </p>
@@ -92,7 +99,7 @@
         {{-- FEATURES GRID --}}
         <div class="max-w-7xl mx-auto px-6 pb-20 w-full">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
+
                 <div class="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-2xl hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:-translate-y-2 transition-all duration-300">
                     <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
@@ -155,7 +162,7 @@
             updateIcons();
         });
     </script>
-    
+
     {{-- Animación CSS para los Blobs --}}
     <style>
         @keyframes blob {
