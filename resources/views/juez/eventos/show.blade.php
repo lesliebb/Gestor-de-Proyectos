@@ -36,7 +36,7 @@
                 </nav>
             </div>
 
-            {{-- CONTENIDO TAB 1: LISTA DE PROYECTOS --}}
+           {{-- CONTENIDO TAB 1: LISTA DE PROYECTOS --}}
             <div x-show="tab === 'equipos'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
                     <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
@@ -44,7 +44,16 @@
                         <span class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold px-3 py-1 rounded-full">{{ $evento->proyectos->count() }} Total</span>
                     </div>
 
-                    @if ($evento->proyectos->isEmpty())
+                    {{-- LÓGICA DE RANKING Y ORDENAMIENTO --}}
+                    @php
+                        // Ordenamos la colección completa de proyectos por su puntuación total (Descendente)
+                        // Esto asegura que el Top 1 aparezca primero en la tabla visualmente
+                        $proyectosOrdenados = $evento->proyectos->sortByDesc(function ($p) {
+                            return $p->calificaciones->sum('puntuacion');
+                        });
+                    @endphp
+
+                    @if ($proyectosOrdenados->isEmpty())
                         <div class="flex flex-col items-center justify-center py-16 text-center">
                             <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-full mb-3">
                                 <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
@@ -57,6 +66,7 @@
                             <table class="w-full text-left border-collapse">
                                 <thead>
                                     <tr class="bg-gray-50/50 dark:bg-gray-700/30 border-b border-gray-100 dark:border-gray-700 text-xs uppercase text-gray-500 dark:text-gray-400 font-semibold tracking-wider">
+                                        <th class="px-6 py-4 text-center w-20">Ranking</th>
                                         <th class="px-6 py-4">Equipo / Integrantes</th>
                                         <th class="px-6 py-4">Proyecto</th>
                                         <th class="px-6 py-4 text-center">Estado</th>
@@ -64,12 +74,44 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-                                    @foreach ($evento->proyectos as $proyecto)
+                                    {{-- ITERAMOS SOBRE LA COLECCIÓN ORDENADA --}}
+                                    @foreach ($proyectosOrdenados as $proyecto)
                                         @php
                                             $equipo = $proyecto->equipo;
-                                            $yaCalificado = $proyecto->calificaciones->isNotEmpty(); // Ajustar lógica según tu modelo real
+                                            
+                                            // Verificamos si el juez actual ya calificó este proyecto
+                                            $yaCalificado = $proyecto->calificaciones->where('juez_user_id', auth()->id())->isNotEmpty();
+                                            
+                                            // CÁLCULO DE RANK: 
+                                            // Como la lista ya viene ordenada, el índice del bucle ($loop->iteration) es el ranking.
+                                            $rank = $loop->iteration;
+                                            
+                                            // Estilos del Rank 
+                                            $rankClass = 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300';
+                                            $medal = null;
+
+                                            if($rank === 1) {
+                                                $rankClass = 'bg-yellow-100 text-yellow-700 border border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-700';
+                                                $medal = '🥇';
+                                            } elseif($rank === 2) {
+                                                $rankClass = 'bg-gray-200 text-gray-700 border border-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500';
+                                                $medal = '🥈';
+                                            } elseif($rank === 3) {
+                                                $rankClass = 'bg-orange-100 text-orange-800 border border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800';
+                                                $medal = '🥉';
+                                            }
                                         @endphp
                                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/20 transition-colors group">
+                                            {{-- Rank --}}
+                                            <td class="px-6 py-4 align-middle text-center">
+                                                <div class="flex justify-center">
+                                                    <div class="w-10 h-10 flex items-center justify-center rounded-full font-bold text-sm {{ $rankClass }}">
+                                                        {{ $medal ?? $rank }}
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            {{-- Equipo --}}
                                             <td class="px-6 py-4 align-top">
                                                 <div class="flex items-center gap-3">
                                                     <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">
@@ -84,12 +126,16 @@
                                                     </div>
                                                 </div>
                                             </td>
+
+                                            {{-- Proyecto --}}
                                             <td class="px-6 py-4 align-top">
                                                 <p class="font-bold text-gray-800 dark:text-gray-200 text-sm mb-1">{{ $proyecto->nombre }}</p>
                                                 <p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 max-w-xs leading-relaxed">
                                                     {{ $proyecto->descripcion }}
                                                 </p>
                                             </td>
+
+                                            {{-- Estado --}}
                                             <td class="px-6 py-4 align-top text-center">
                                                 @if ($yaCalificado)
                                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 border border-green-200 dark:border-green-800">
@@ -103,6 +149,8 @@
                                                     </span>
                                                 @endif
                                             </td>
+
+                                            {{-- Acciones --}}
                                             <td class="px-6 py-4 align-top text-right">
                                                 <div class="flex justify-end gap-2">
                                                     <a href="{{ route('juez.evaluaciones.edit', $proyecto) }}" 
