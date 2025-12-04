@@ -3,10 +3,10 @@
 
     <!-- HEADER DEL SIDEBAR (Logo) -->
     <div
-        class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-        <a href="{{ route(Auth::user()->getDashboardRouteName()) }}" class="flex items-center gap-3">
+        class="flex items-center justify-between gap-2 pl-3 py-3 h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <a href="{{ route(Auth::user()->getDashboardRouteName()) }}" class="flex items-center gap-2">
             {{-- Logo: Cambia el fill a índigo o el color de tu marca en modo claro --}}
-            <x-application-logo class="w-8 h-8 fill-current text-indigo-600 dark:text-white" />
+            <x-application-logo class="w-16 h-16 fill-current text-indigo-600 dark:text-white" />
             <span class="text-xl font-bold text-gray-800 dark:text-white tracking-wider">GesPro</span>
         </a>
 
@@ -16,8 +16,6 @@
             </svg>
         </button>
     </div>
-
-    <!-- MENÚ SCROLLABLE -->
     <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         <nav class="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
             <div>

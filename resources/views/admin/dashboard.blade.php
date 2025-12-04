@@ -17,7 +17,7 @@
             </a>
 
             {{-- Settings Dropdown --}}
-            <div class="relative" x-data="{ open: false }">
+            <div class="relative z-30" x-data="{ open: false }">
                 <button @click="open = !open"
                     class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700 transition">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
