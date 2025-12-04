@@ -148,7 +148,7 @@
                                     class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Comentarios y
                                     Recomendaciones</label>
                                 <textarea id="comentario" name="comentario" rows="4"
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all p-4 text-sm leading-relaxed"
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all p-4 text-sm leading-relaxed text-gray-900 dark:text-white"
                                     placeholder="Escribe aquí tus observaciones sobre fortalezas y áreas de mejora...">{{ old('comentario', $comentarioTexto) }}</textarea>
                                 <p class="text-xs text-gray-500 mt-2 flex items-center">
                                     <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

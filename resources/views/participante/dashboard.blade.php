@@ -445,7 +445,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         {{-- Card: Crear un Nuevo Equipo --}}
         <a href="{{ route('participante.equipos.create') }}"
-            class="group relative bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300">
+            class="group relative bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300 flex flex-col min-h-[280px]">
             <div
                 class="absolute top-4 right-4 w-12 h-12 bg-indigo-50 dark:bg-indigo-900/20 rounded-full flex items-center justify-center group-hover:bg-indigo-600 transition-colors duration-300">
                 <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400 group-hover:text-white transition-colors"
@@ -457,11 +457,11 @@
             <h3
                 class="text-xl font-bold text-gray-900 dark:text-white mb-2 pr-16 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                 Crear un Nuevo Equipo</h3>
-            <p class="text-gray-500 dark:text-gray-400 text-sm mb-16">Registra tu idea de
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-auto">Registra tu idea de
                 proyecto,
                 conviértete en líder y recluta a tus compañeros.</p>
             <span
-                class="inline-flex items-center text-sm font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
+                class="inline-flex items-center text-sm font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform mt-6">
                 Comenzar Registro <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -472,7 +472,7 @@
 
         {{-- Card: Unirme a un Equipo --}}
         <a href="{{ route('participante.equipos.join') }}"
-            class="group relative bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300">
+            class="group relative bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300 flex flex-col min-h-[280px]">
             <div
                 class="absolute top-4 right-4 w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-full flex items-center justify-center group-hover:bg-purple-600 transition-colors duration-300">
                 <svg class="w-6 h-6 text-purple-600 dark:text-purple-400 group-hover:text-white transition-colors"
@@ -485,10 +485,10 @@
             <h3
                 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                 Unirme a un Equipo</h3>
-            <p class="text-gray-500 dark:text-gray-400 text-sm mb-16">Explora los equipos
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-auto">Explora los equipos
                 existentes que buscan talento y postúlate con tu perfil.</p>
             <span
-                class="inline-flex items-center text-sm font-bold text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform">
+                class="inline-flex items-center text-sm font-bold text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform mt-6">
                 Ver Vacantes <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
