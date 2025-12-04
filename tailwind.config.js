@@ -54,6 +54,7 @@ export default {
                 'book-open': 'bookOpen 1.5s ease-out forwards',
                 'book-close': 'bookClose 1.2s ease-in forwards',
                 'page-turn': 'pageTurn 1s ease-in-out',
+                'spin-slow': 'spin 3s linear infinite',
             },
             keyframes: {
                 bookOpen: {

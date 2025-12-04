@@ -333,20 +333,57 @@ function initBookAnimation() {
         ease: "power2.in"
     });
 
-    console.log('Realistic Book Animation Initialized');
+    console.log('Book animation initialized: Fixed -> Scroll -> Open -> Read');
     ScrollTrigger.refresh();
 }
 
-// ============================================
-// INICIALIZACIÓN
-// ============================================
+function initAuthAnimations() {
+    const authCard = document.querySelector('.auth-card');
+    if (authCard) {
+        gsap.to(authCard, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            delay: 0.2
+        });
+
+        gsap.from(".auth-header", {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.4
+        });
+
+        gsap.from(".form-item", {
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+            delay: 0.6
+        });
+    }
+}
+
+function initHelpWidgetAnimations() {
+    const helpWidget = document.querySelector('[x-data="{ open: false }"]');
+    if (helpWidget) {
+        gsap.from(helpWidget, {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "elastic.out(1, 0.5)",
+            delay: 1
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar animación del libro
-    initBookAnimation();
-
-    // Inicializar escena 3D del Trofeo
-    initTrophy3D();
-
-    // Inicializar Partículas
     initParticles();
+    initTrophy3D();
+    initBookAnimation();
+    initAuthAnimations();
+    initHelpWidgetAnimations();
 });
