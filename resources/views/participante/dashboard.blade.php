@@ -40,8 +40,8 @@
                                 <div>
                                     <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Evento Activo</p>
                                     <h4 class="text-sm font-bold text-gray-800 dark:text-white mt-1 truncate max-w-[150px]"
-                                        title="{{ $evento_inscrito->nombre }}">
-                                        {{ $evento_inscrito->nombre ?? 'Ninguno' }}
+                                        title="{{ $evento_inscrito?->nombre ?? 'Ninguno' }}">
+                                        {{ $evento_inscrito?->nombre ?? 'Ninguno' }}
                                     </h4>
                                 </div>
                                 <div
