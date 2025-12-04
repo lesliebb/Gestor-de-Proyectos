@@ -1,15 +1,7 @@
 <x-app-layout>
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Calendario de Eventos') }}
-            </h2>
-            {{-- Botón Agregar Evento Restaurado y Estilizado --}}
-            <a href="{{ route('admin.eventos.create') }}"
-                class="bg-indigo-600 dark:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-500 dark:hover:bg-indigo-400 transition-all shadow-md hover:shadow-lg flex items-center gap-2 font-medium">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                Agregar evento
-            </a>
-        </div>
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Calendario de Eventos') }}
+        </h2>
 
     <div class="py-8">
         <div class="max-w-[1600px] mx-auto sm:px-6 lg:px-8 space-y-8"> {{-- Espaciado vertical entre secciones --}}
@@ -32,31 +24,40 @@
                         <!-- JS -->
                     </h3>
 
-                    {{-- Controles Agrupados --}}
-                    <div class="flex items-center gap-2 bg-gray-100 dark:bg-[#24303f] p-1 rounded-xl border border-gray-200 dark:border-gray-700">
-                        
-                        {{-- Botón Hoy --}}
-                        <button id="todayBtn" class="px-4 py-1.5 text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 rounded-lg shadow-sm transition-all">
-                            Hoy
-                        </button>
+                    <div class="flex flex-col sm:flex-row items-center gap-3">
+                        {{-- Botón Agregar Evento --}}
+                        <a href="{{ route('admin.eventos.create') }}"
+                            class="bg-indigo-600 dark:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-all shadow-md hover:shadow-lg flex items-center gap-2 font-bold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            Agregar Evento
+                        </a>
 
-                        <div class="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1"></div>
+                        {{-- Controles Agrupados --}}
+                        <div class="flex items-center gap-2 bg-gray-100 dark:bg-[#24303f] p-1 rounded-xl border border-gray-200 dark:border-gray-700">
+                            
+                            {{-- Botón Hoy --}}
+                            <button id="todayBtn" class="px-4 py-1.5 text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 rounded-lg shadow-sm transition-all">
+                                Hoy
+                            </button>
 
-                        {{-- Navegación --}}
-                        <button id="prevBtn" class="p-1.5 rounded-lg hover:bg-white dark:hover:bg-gray-600 text-gray-500 dark:text-gray-400 transition-all">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                        </button>
-                        <button id="nextBtn" class="p-1.5 rounded-lg hover:bg-white dark:hover:bg-gray-600 text-gray-500 dark:text-gray-400 transition-all">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </button>
+                            <div class="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1"></div>
 
-                        <div class="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1"></div>
+                            {{-- Navegación --}}
+                            <button id="prevBtn" class="p-1.5 rounded-lg hover:bg-white dark:hover:bg-gray-600 text-gray-500 dark:text-gray-400 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <button id="nextBtn" class="p-1.5 rounded-lg hover:bg-white dark:hover:bg-gray-600 text-gray-500 dark:text-gray-400 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
 
-                        {{-- Selector de Vista --}}
-                        <select id="viewSelector" class="bg-transparent border-none text-sm font-bold text-gray-700 dark:text-white focus:ring-0 cursor-pointer py-1.5 pl-2 pr-8">
-                            <option value="month" class="text-black">Vista Mensual</option>
-                            <option value="year" class="text-black">Vista del año</option>
-                        </select>
+                            <div class="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1"></div>
+
+                            {{-- Selector de Vista --}}
+                            <select id="viewSelector" class="bg-transparent border-none text-sm font-bold text-gray-700 dark:text-white focus:ring-0 cursor-pointer py-1.5 pl-2 pr-8">
+                                <option value="month" class="text-black">Vista Mensual</option>
+                                <option value="year" class="text-black">Vista del año</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
