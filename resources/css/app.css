@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles for 3D canvas */
+@layer utilities {
+    #mushroom-canvas {
+        touch-action: none;
+        cursor: grab;
+    }
+
+    #mushroom-canvas:active {
+        cursor: grabbing;
+    }
+}
+
+@media (max-width: 768px) {
+    #book-container {
+        height: 400px;
+    }
+}
