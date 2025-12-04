@@ -43,7 +43,7 @@
                             <div class="mb-5 relative">
                                 <label for="descripcion" class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Detalles del Avance</label>
                                 <textarea id="descripcion" name="descripcion" rows="6" 
-                                          class="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm leading-relaxed p-4 shadow-sm transition placeholder-gray-400" 
+                                          class="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm leading-relaxed p-4 shadow-sm transition placeholder-gray-400 text-gray-900 dark:text-white" 
                                           placeholder="Describe qué lograron hoy:&#10;• Módulos terminados&#10;• Errores corregidos&#10;• Decisiones tomadas..." required></textarea>
                                 <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
                             </div>
