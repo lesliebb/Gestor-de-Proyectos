@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreEventoRequest;
 use App\Http\Requests\Admin\UpdateEventoRequest;
+use App\Mail\JuezEventoAsignado;
 use App\Models\Evento;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EventoController extends Controller
 {
@@ -35,7 +37,15 @@ class EventoController extends Controller
     public function store(StoreEventoRequest $request)
     {
         $evento = Evento::create($request->validated());
-        $evento->jueces()->attach($request->input('jueces', []));
+        $juecesIds = $request->input('jueces', []);
+        $evento->jueces()->attach($juecesIds);
+        
+        // Enviar email a cada juez asignado
+        $jueces = User::whereIn('id', $juecesIds)->get();
+        foreach ($jueces as $juez) {
+            Mail::to($juez->email)->send(new JuezEventoAsignado($juez, $evento));
+        }
+        
         return redirect()->route('admin.eventos.index')->with('success', 'Evento creado exitosamente.');
     }
 
@@ -62,13 +72,25 @@ class EventoController extends Controller
     public function update(UpdateEventoRequest $request, Evento $evento)
     {
         $evento->update($request->validated());
-        $evento->jueces()->sync($request->input('jueces', []));
+        $nuevosjuecesIds = $request->input('jueces', []);
+        $juecesActuales = $evento->jueces->pluck('id')->toArray();
+        
+        // Obtener los jueces nuevos (los que no estaban antes)
+        $juecesNuevos = array_diff($nuevosjuecesIds, $juecesActuales);
+        
+        $evento->jueces()->sync($nuevosjuecesIds);
+        
+        // Enviar email solo a los jueces nuevamente asignados
+        if (!empty($juecesNuevos)) {
+            $jueces = User::whereIn('id', $juecesNuevos)->get();
+            foreach ($jueces as $juez) {
+                Mail::to($juez->email)->send(new JuezEventoAsignado($juez, $evento));
+            }
+        }
+        
         return redirect()->route('admin.eventos.index')->with('success', 'Evento actualizado exitosamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     /**
      * Remove the specified resource from storage.
      * 

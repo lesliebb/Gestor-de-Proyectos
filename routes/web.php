@@ -154,7 +154,7 @@ Route::middleware(['auth', 'role:Participante'])->prefix('participante')->name('
         Route::get('/dashboard', [ParticipanteController::class, 'index'])->name('dashboard');
 
         // Gestión de Equipos (CRUD Básico y Acciones Específicas)
-        Route::resource('equipos', ParticipanteEquipoController::class)->only(['create', 'store', 'edit', 'update']);
+        Route::resource('equipos', ParticipanteEquipoController::class)->only(['create', 'store', 'show', 'edit', 'update']);
         Route::delete('/equipos/salir', [\App\Http\Controllers\Participante\EquipoController::class, 'leave'])->name('equipos.leave');
 
         Route::controller(ParticipanteEquipoController::class)->group(function () {

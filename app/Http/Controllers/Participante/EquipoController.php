@@ -192,6 +192,13 @@ class EquipoController extends Controller
         return view('participante.equipos.edit', compact('equipo', 'candidatos', 'perfiles'));
     }
 
+    public function show($id)
+    {
+        $equipo = Equipo::with(['proyecto.evento', 'participantes.carrera', 'participantes.user'])->findOrFail($id);
+        
+        return view('participante.equipos.show', compact('equipo'));
+    }
+
     public function update(Request $request, $id)
     {
         $equipo = Equipo::findOrFail($id);
