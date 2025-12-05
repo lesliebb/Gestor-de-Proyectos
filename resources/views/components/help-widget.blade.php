@@ -17,7 +17,7 @@
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </span>
-                Ayuda y FAQ
+                Ayuda y Preguntas
             </h3>
             <button @click="open = false"
                 class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
@@ -44,9 +44,10 @@
                 </button>
                 <div x-show="expanded" x-collapse
                     class="px-4 py-3 text-sm text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 leading-relaxed">
-                    Para unirte o crear un equipo, ve a la sección "Equipos" en el menú lateral. Si eres líder,
-                    selecciona "Crear Equipo". Si deseas unirte, busca el equipo por su código o nombre y solicita
-                    unirte.
+                    Ingresa tus datos de contacto, para unirte o crear un equipo,
+                    pulsa el boton de unirse a un equipo. Si eres líder,
+                    selecciona "Crear Equipo". Si deseas unirte, busca el equipo por su nombre y solicita
+                    unirte, espera a que te llegue un correo de confirmación de que te uniste al equipo.
                 </div>
             </div>
 
@@ -64,8 +65,13 @@
                 </button>
                 <div x-show="expanded" x-collapse
                     class="px-4 py-3 text-sm text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 leading-relaxed">
-                    Tus resultados estarán disponibles en la sección "Resultados" una vez que los jueces hayan
-                    completado la evaluación de tu proyecto. Recibirás una notificación cuando estén listos.
+                    Tus resultados estarán disponibles en la sección "Calificacion global"
+                    que te aparecerá al costado derecho de tu panel principal,
+                    puedes escoger entre tu certificado individualo tu certificado de equipo.
+                    Puedes tambien ver los criterios de tu evaluación en la sección
+                    "Calificacion por criterios", y dandole a ver detalles.
+                    una vez que los jueces hayan completado la evaluación de tu proyecto.
+                    Recibirás una notificación cuando estén listos.
                 </div>
             </div>
 
@@ -102,8 +108,8 @@
                 </button>
                 <div x-show="expanded" x-collapse
                     class="px-4 py-3 text-sm text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 leading-relaxed">
-                    Una vez que tengas un equipo registrado, la opción "Mi Proyecto" se habilitará en el menú. Allí
-                    podrás subir la documentación y detalles de tu proyecto.
+                    Una vez que tengas un equipo registrado, la opción "Mi Proyecto" se habilitará en el panel
+                    principal. El link del repositorio lo agregara el lider del equipo.
                 </div>
             </div>
         </div>
