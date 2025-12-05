@@ -36,7 +36,7 @@
                 </nav>
             </div>
 
-           {{-- CONTENIDO TAB 1: LISTA DE PROYECTOS --}}
+            {{-- CONTENIDO TAB 1: LISTA DE PROYECTOS --}}
             <div x-show="tab === 'equipos'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
                     <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
@@ -44,10 +44,8 @@
                         <span class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold px-3 py-1 rounded-full">{{ $evento->proyectos->count() }} Total</span>
                     </div>
 
-                    {{-- LÓGICA DE RANKING Y ORDENAMIENTO --}}
                     @php
-                        // Ordenamos la colección completa de proyectos por su puntuación total (Descendente)
-                        // Esto asegura que el Top 1 aparezca primero en la tabla visualmente
+                        // Ordenamiento por puntuación descendente
                         $proyectosOrdenados = $evento->proyectos->sortByDesc(function ($p) {
                             return $p->calificaciones->sum('puntuacion');
                         });
@@ -66,7 +64,7 @@
                             <table class="w-full text-left border-collapse">
                                 <thead>
                                     <tr class="bg-gray-50/50 dark:bg-gray-700/30 border-b border-gray-100 dark:border-gray-700 text-xs uppercase text-gray-500 dark:text-gray-400 font-semibold tracking-wider">
-                                        <th class="px-6 py-4 text-center w-20">Ranking</th>
+                                        <th class="px-6 py-4 text-center w-24">Ranking</th>
                                         <th class="px-6 py-4">Equipo / Integrantes</th>
                                         <th class="px-6 py-4">Proyecto</th>
                                         <th class="px-6 py-4 text-center">Estado</th>
@@ -74,40 +72,66 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-                                    {{-- ITERAMOS SOBRE LA COLECCIÓN ORDENADA --}}
                                     @foreach ($proyectosOrdenados as $proyecto)
                                         @php
                                             $equipo = $proyecto->equipo;
-                                            
-                                            // Verificamos si el juez actual ya calificó este proyecto
                                             $yaCalificado = $proyecto->calificaciones->where('juez_user_id', auth()->id())->isNotEmpty();
-                                            
-                                            // CÁLCULO DE RANK: 
-                                            // Como la lista ya viene ordenada, el índice del bucle ($loop->iteration) es el ranking.
                                             $rank = $loop->iteration;
-                                            
-                                            // Estilos del Rank 
-                                            $rankClass = 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300';
-                                            $medal = null;
-
-                                            if($rank === 1) {
-                                                $rankClass = 'bg-yellow-100 text-yellow-700 border border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-700';
-                                                $medal = '🥇';
-                                            } elseif($rank === 2) {
-                                                $rankClass = 'bg-gray-200 text-gray-700 border border-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500';
-                                                $medal = '🥈';
-                                            } elseif($rank === 3) {
-                                                $rankClass = 'bg-orange-100 text-orange-800 border border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800';
-                                                $medal = '🥉';
-                                            }
                                         @endphp
                                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/20 transition-colors group">
-                                            {{-- Rank --}}
+                                            
+                                            {{-- COLUMNA RANKING CON SVGs --}}
                                             <td class="px-6 py-4 align-middle text-center">
-                                                <div class="flex justify-center">
-                                                    <div class="w-10 h-10 flex items-center justify-center rounded-full font-bold text-sm {{ $rankClass }}">
-                                                        {{ $medal ?? $rank }}
-                                                    </div>
+                                                <div class="flex justify-center items-center h-16 w-16 mx-auto relative group-hover:scale-110 transition-transform duration-300">
+                                                    
+                                                    @if($rank === 1)
+                                                        {{-- MEDALLA DE ORO (SVG Proporcionado) --}}
+                                                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 drop-shadow-[0_0_15px_rgba(252,205,29,0.7)]">
+                                                            <g id="Flat">
+                                                                <g id="Color">
+                                                                    <polygon fill="#212529" points="8.26 3 25.94 33.62 38.06 26.62 24.42 3 8.26 3"/><path d="M38.06,26.62l-7.21-12.5-3.72,6.44a21.53,21.53,0,0,0-7,3l5.8,10Z" fill="#111315"/><polygon fill="#dd051d" points="34.6 28.62 29.4 31.62 12.87 3 19.8 3 34.6 28.62"/><polygon fill="#212529" points="39.58 3 25.94 26.62 38.06 33.62 55.74 3 39.58 3"/><path d="M34.6,28.62l-6.06-10.5-1.42,2.46a21.44,21.44,0,0,0-3.46,1.1l5.74,9.94Z" fill="#a60416"/><path d="M43.86,23.58a21.46,21.46,0,0,0-14.17-3.45l-3.75,6.49,12.12,7Z" fill="#111315"/><polygon fill="#dd051d" points="51.13 3 34.6 31.62 29.4 28.62 44.2 3 51.13 3"/><path d="M34.6,31.62l5.74-9.94a21.41,21.41,0,0,0-6-1.55L29.4,28.62Z" fill="#a60416"/>
+                                                                    {{-- Circulo Dorado --}}
+                                                                    <circle cx="32" cy="41.5" fill="#fccd1d" r="19.5"/><circle cx="32" cy="41.5" fill="#f9a215" r="14.5"/>
+                                                                    {{-- Número 1 --}}
+                                                                    <path d="M34.13,43.63V33H29.88a3.19,3.19,0,0,1-3.19,3.19H25.63v4.25h4.25v3.19a2.13,2.13,0,0,1-2.13,2.12H25.63V50H38.38V45.75H36.25A2.12,2.12,0,0,1,34.13,43.63Z" fill="#fccd1d"/>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+
+                                                    @elseif($rank === 2)
+                                                        {{-- MEDALLA DE PLATA (SVG Modificado a tonos grises/plata) --}}
+                                                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 drop-shadow-[0_0_15px_rgba(200,200,200,0.6)]">
+                                                            <g id="Flat">
+                                                                <g id="Color">
+                                                                    <polygon fill="#212529" points="8.26 3 25.94 33.62 38.06 26.62 24.42 3 8.26 3"/><path d="M38.06,26.62l-7.21-12.5-3.72,6.44a21.53,21.53,0,0,0-7,3l5.8,10Z" fill="#111315"/><polygon fill="#dd051d" points="34.6 28.62 29.4 31.62 12.87 3 19.8 3 34.6 28.62"/><polygon fill="#212529" points="39.58 3 25.94 26.62 38.06 33.62 55.74 3 39.58 3"/><path d="M34.6,28.62l-6.06-10.5-1.42,2.46a21.44,21.44,0,0,0-3.46,1.1l5.74,9.94Z" fill="#a60416"/><path d="M43.86,23.58a21.46,21.46,0,0,0-14.17-3.45l-3.75,6.49,12.12,7Z" fill="#111315"/><polygon fill="#dd051d" points="51.13 3 34.6 31.62 29.4 28.62 44.2 3 51.13 3"/><path d="M34.6,31.62l5.74-9.94a21.41,21.41,0,0,0-6-1.55L29.4,28.62Z" fill="#a60416"/>
+                                                                    {{-- Circulo Plata (Colores ajustados) --}}
+                                                                    <circle cx="32" cy="41.5" fill="#E2E8F0" r="19.5"/><circle cx="32" cy="41.5" fill="#94A3B8" r="14.5"/>
+                                                                    {{-- Número 2 --}}
+                                                                    <path d="M33.88,33.57a6.49,6.49,0,0,0-5.81,1.23,6.41,6.41,0,0,0-2.21,4.89H30c0-2.24,3.37-2.38,4-1,1,2.1-8,7-8,7v4H38v-4H34a7.07,7.07,0,0,0,4-7.54A6.16,6.16,0,0,0,33.88,33.57Z" fill="#E2E8F0"/>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+
+                                                    @elseif($rank === 3)
+                                                        {{-- MEDALLA DE BRONCE (SVG Modificado a tonos bronce/cobre) --}}
+                                                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 drop-shadow-[0_0_15px_rgba(205,127,50,0.6)]">
+                                                            <g id="Flat">
+                                                                <g id="Color">
+                                                                    <polygon fill="#212529" points="8.26 3 25.94 33.62 38.06 26.62 24.42 3 8.26 3"/><path d="M38.06,26.62l-7.21-12.5-3.72,6.44a21.53,21.53,0,0,0-7,3l5.8,10Z" fill="#111315"/><polygon fill="#dd051d" points="34.6 28.62 29.4 31.62 12.87 3 19.8 3 34.6 28.62"/><polygon fill="#212529" points="39.58 3 25.94 26.62 38.06 33.62 55.74 3 39.58 3"/><path d="M34.6,28.62l-6.06-10.5-1.42,2.46a21.44,21.44,0,0,0-3.46,1.1l5.74,9.94Z" fill="#a60416"/><path d="M43.86,23.58a21.46,21.46,0,0,0-14.17-3.45l-3.75,6.49,12.12,7Z" fill="#111315"/><polygon fill="#dd051d" points="51.13 3 34.6 31.62 29.4 28.62 44.2 3 51.13 3"/><path d="M34.6,31.62l5.74-9.94a21.41,21.41,0,0,0-6-1.55L29.4,28.62Z" fill="#a60416"/>
+                                                                    {{-- Circulo Bronce (Colores ajustados) --}}
+                                                                    <circle cx="32" cy="41.5" fill="#FDBA74" r="19.5"/><circle cx="32" cy="41.5" fill="#C2410C" r="14.5"/>
+                                                                    {{-- Número 3 --}}
+                                                                    <path d="M36.54,41.5A4.52,4.52,0,0,0,38.38,38c0-2.76-2.86-5-6.38-5s-6.37,2.24-6.37,5h3.92a2,2,0,0,1,3.9-.29c.17,1.23-.77,2.73-2,2.73v2.12c2.22,0,2.84,3.5.72,4.32A2,2,0,0,1,29.55,45H25.63c0,2.76,2.85,5,6.37,5s6.38-2.24,6.38-5A4.52,4.52,0,0,0,36.54,41.5Z" fill="#FDBA74"/>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+
+                                                    @else
+                                                        {{-- Ranking normal para 4to lugar en adelante --}}
+                                                        <div class="w-10 h-10 flex items-center justify-center rounded-full font-bold text-sm bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400 border border-gray-200 dark:border-gray-600">
+                                                            {{ $rank }}
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </td>
 
