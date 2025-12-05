@@ -190,4 +190,21 @@ Route::middleware(['auth', 'role:Participante'])->prefix('participante')->name('
     });
 });
 
+Route::get('/test-connection', function () {
+    $host = config('mail.mailers.smtp.host');
+    $port = config('mail.mailers.smtp.port');
+    
+    echo "Intentando conectar a $host en el puerto $port...<br>";
+    
+    $timeout = 10;
+    $socket = fsockopen($host, $port, $errno, $errstr, $timeout);
+    
+    if (!$socket) {
+        return "ERROR: No se pudo conectar. Código: $errno - Mensaje: $errstr";
+    }
+    
+    fclose($socket);
+    return "ÉXITO: Conexión TCP establecida correctamente con el servidor de correo.";
+});
+
 require __DIR__ . '/auth.php';
