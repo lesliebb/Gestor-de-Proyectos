@@ -26,6 +26,8 @@ class StoreEventoRequest extends FormRequest
             'descripcion' => ['nullable', 'string'],
             'fecha_inicio' => ['required', 'date'],
             'fecha_fin' => ['required', 'date', 'after:fecha_inicio'],
+            'jueces' => ['nullable', 'array'],
+            'jueces.*' => ['exists:users,id'],
         ];
     }
 }

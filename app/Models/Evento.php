@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\CriterioEvaluacion;
 use App\Models\Proyecto;
 use App\Models\Equipo;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Evento extends Model
 {
@@ -41,4 +42,17 @@ class Evento extends Model
         return $this->belongsToMany(User::class, 'evento_user', 'evento_id', 'user_id');
     }
 
+    public function getRouteKey()
+    {
+        return Hashids::encode($this->getKey());
+    }
+    public function resolveRouteBinding($value, $field = null)
+    {
+        $decoded = Hashids::decode($value);
+        if (empty($decoded)) {
+            return null;
+        }
+        $realId = $decoded[0];
+        return $this->where('id', $realId)->firstOrFail();
+    }
 }

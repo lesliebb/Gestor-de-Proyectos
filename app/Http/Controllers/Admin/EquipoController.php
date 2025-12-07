@@ -27,7 +27,7 @@ class EquipoController extends Controller
 
     public function create()
     {
-        $eventos = Evento::where('fecha_fin', '>=', now())->get();
+        $eventos = Evento::where('fecha_inicio', '>', now())->get();
         return view('admin.equipos.create', compact('eventos'));
     }
 

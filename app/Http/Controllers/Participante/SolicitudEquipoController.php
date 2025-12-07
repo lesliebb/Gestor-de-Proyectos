@@ -29,6 +29,12 @@ class SolicitudEquipoController extends Controller
 
         $participante = $request->user()->participante;
 
+        // Validar que el evento aún no ha comenzado
+        $evento = $equipo->proyecto->evento;
+        if ($evento->fecha_inicio <= now()) {
+            return redirect()->route('participante.dashboard')->with('error', 'Este evento ya ha comenzado. No se pueden aceptar nuevas solicitudes.');
+        }
+
         // Validar que no esté en el equipo
         if ($participante->equipos->contains($equipo->id)) {
             return redirect()->route('participante.dashboard')->with('error', 'Ya estás en este equipo.');
