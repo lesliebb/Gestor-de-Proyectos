@@ -81,7 +81,15 @@
                                     <td class="py-5 px-4 pl-9 xl:pl-11">
                                         <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
                                             <div class="h-10 w-10 rounded-full bg-indigo-50 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold text-lg overflow-hidden shrink-0">
-                                                {{ strtoupper(substr($usuario->nombre ?: $usuario->email, 0, 1)) }}
+                                                @php
+                                                    $avatarPath = 'storage/avatars/' . $usuario->id . '.jpg';
+                                                    $hasAvatar = file_exists(public_path($avatarPath));
+                                                @endphp
+                                                @if($hasAvatar)
+                                                    <img src="{{ asset($avatarPath) . '?v=' . time() }}" alt="Avatar" class="h-full w-full object-cover">
+                                                @else
+                                                    {{ strtoupper(substr($usuario->nombre ?: $usuario->email, 0, 1)) }}
+                                                @endif
                                             </div>
                                             <div>
                                                 <h5 class="font-medium text-black dark:text-white">{{ $usuario->nombre }}</h5>
