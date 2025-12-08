@@ -24,11 +24,11 @@ class ProfileUpdateParticipanteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[\pL\s]+$/u'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
             // Campos extra del participante
-            'telefono' => ['nullable', 'string', 'max:20'],
-            'no_control' => ['required', 'string', 'max:20', Rule::unique('participantes', 'no_control')->ignore($this->user()->participante->id ?? null)],
+            'telefono' => ['nullable', 'digits:10'],
+            'no_control' => ['required', 'digits:8', Rule::unique('participantes', 'no_control')->ignore($this->user()->participante->id ?? null)],
             'carrera_id' => ['required', 'exists:carreras,id'],
         ];
     }

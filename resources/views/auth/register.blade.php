@@ -48,7 +48,7 @@
                             <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
                                 autocomplete="name"
                                 class="w-full pl-10 pr-4 py-3 rounded-xl border-gray-300 dark:bg-gray-900 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm"
-                                placeholder="Juan Pérez">
+                                placeholder="Juan Pérez" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo letras y espacios">
                         </div>
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>

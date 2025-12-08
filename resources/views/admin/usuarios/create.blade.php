@@ -42,7 +42,7 @@
                                     {{ $errors->has('nombre') 
                                         ? 'border-red-500 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500 dark:border-red-500 dark:text-red-500' 
                                         : 'border-gray-300 text-black focus:border-indigo-600 dark:border-gray-600 dark:text-white dark:focus:border-indigo-600' 
-                                    }}" />
+                                    }}" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo letras y espacios" />
                                 
                                 {{-- Icono de Error (Solo si hay error) --}}
                                 @error('nombre')

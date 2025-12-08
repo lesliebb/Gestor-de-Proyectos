@@ -25,7 +25,7 @@ class UpdateUsuarioRequest extends FormRequest
     {
         $userId = $this->route('usuario')->id; // Obtener el ID del usuario que se está editando
         return [
-            'nombre' => ['required', 'string', 'max:255'],
+            'nombre' => ['required', 'string', 'max:255', 'regex:/^[\pL\s]+$/u'],
             'email' => [
                 'required', 
                 'string', 

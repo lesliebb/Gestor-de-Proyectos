@@ -47,7 +47,8 @@
                                               required 
                                               autofocus 
                                               autocomplete="off" 
-                                              placeholder="Ej: 202103456" />
+                                              pattern="[0-9]{8}" maxlength="8" minlength="8" inputmode="numeric" title="Debe tener exactamente 8 dígitos numéricos"
+                                              placeholder="Ej: 20210345" />
                             </div>
                             <x-input-error :messages="$errors->get('no_control')" class="mt-2 pl-1" />
                         </div>
@@ -150,6 +151,7 @@
                                               name="telefono" 
                                               :value="old('telefono', $perfil->telefono ?? '')" 
                                               placeholder="Ej: 951 123 4567"
+                                              pattern="[0-9]{10}" maxlength="10" minlength="10" inputmode="numeric" title="Debe tener exactamente 10 dígitos numéricos"
                                               required />
                             </div>
                             <p class="mt-2 pl-1 text-sm flex items-center gap-1.5 text-gray-500 dark:text-gray-400">

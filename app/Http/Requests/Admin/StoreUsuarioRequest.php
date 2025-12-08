@@ -23,7 +23,7 @@ class StoreUsuarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => ['required', 'string', 'max:255'],
+            'nombre' => ['required', 'string', 'max:255', 'regex:/^[\pL\s]+$/u'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::defaults()],
             'rol_id' => ['required', 'exists:roles,id'], // Validamos que el rol exista

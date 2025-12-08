@@ -21,7 +21,8 @@
                     Nombre Completo
                 </label>
                 <input type="text" name="name" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name"
-                    class="w-full rounded border-[1.5px] border-gray-300 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-indigo-600" />
+                    class="w-full rounded border-[1.5px] border-gray-300 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-indigo-600"
+                    pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo letras y espacios" />
                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
 
@@ -58,7 +59,8 @@
                         Número de Control
                     </label>
                     <input type="text" name="no_control" value="{{ old('no_control', $user->participante->no_control ?? '') }}" required
-                        class="w-full rounded border-[1.5px] border-gray-300 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-indigo-600" />
+                        class="w-full rounded border-[1.5px] border-gray-300 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-indigo-600"
+                        pattern="[0-9]{8}" maxlength="8" minlength="8" inputmode="numeric" title="Debe tener exactamente 8 dígitos numéricos" />
                     <x-input-error class="mt-2" :messages="$errors->get('no_control')" />
                 </div>
 
@@ -68,7 +70,8 @@
                         Telefono
                     </label>
                     <input type="number" name="telefono" value="{{ old('telefono', $user->participante->telefono ?? '') }}" required
-                        class="w-full rounded border-[1.5px] border-gray-300 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-indigo-600" />
+                        class="w-full rounded border-[1.5px] border-gray-300 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-indigo-600"
+                        pattern="[0-9]{10}" maxlength="10" minlength="10" inputmode="numeric" title="Debe tener exactamente 10 dígitos numéricos" />
                     <x-input-error class="mt-2" :messages="$errors->get('telefono')" />
                 </div>
                 {{-- Carrera --}}
