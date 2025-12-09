@@ -41,6 +41,11 @@ class ParticipanteController extends Controller
             }
         }
 
+        // Invitaciones pendientes (para todos los participantes)
+        $invitaciones_pendientes = $participante ? $participante->invitacionesPendientes()
+            ->with(['equipo.proyecto', 'enviadaPor.user', 'perfilSugerido'])
+            ->get() : collect();
+
         // Variables iniciales
         $chartLabels = [];
         $chartData = []; // Datos crudos (0-10) para el gráfico visual
@@ -107,7 +112,8 @@ class ParticipanteController extends Controller
             'chartData',
             'puntajeTotal', // Este ahora es el cálculo exacto ponderado
             'eventos_proximos',
-            'solicitudes_pendientes'
+            'solicitudes_pendientes',
+            'invitaciones_pendientes'
         ));
     }
 

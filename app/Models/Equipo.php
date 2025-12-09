@@ -35,6 +35,16 @@ class Equipo extends Model
         return $this->solicitudes()->where('estado', 'pendiente');
     }
 
+    public function invitaciones()
+    {
+        return $this->hasMany(InvitacionEquipo::class);
+    }
+
+    public function invitacionesPendientes()
+    {
+        return $this->invitaciones()->where('estado', 'pendiente');
+    }
+
     public function getLider()
     {
         return $this->participantes()

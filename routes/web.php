@@ -178,6 +178,21 @@ Route::middleware(['auth', 'role:Participante'])->prefix('participante')->name('
             Route::post('/{solicitud}/rechazar', 'rechazar')->name('rechazar');
         });
 
+        // Invitaciones de Equipos
+        Route::controller(\App\Http\Controllers\Participante\InvitacionEquipoController::class)->prefix('invitaciones')->name('invitaciones.')->group(function () {
+            // Para participantes: ver y responder invitaciones
+            Route::get('/mis-invitaciones', 'misInvitaciones')->name('mis');
+            Route::post('/{invitacion}/aceptar', 'aceptar')->name('aceptar');
+            Route::post('/{invitacion}/rechazar', 'rechazar')->name('rechazar');
+        });
+
+        // Para líder: enviar y ver invitaciones
+        Route::controller(\App\Http\Controllers\Participante\InvitacionEquipoController::class)->group(function () {
+            Route::get('/equipo/{equipo}/invitar', 'showInvitarForm')->name('invitaciones.form');
+            Route::post('/equipo/{equipo}/invitar', 'enviarInvitacion')->name('invitaciones.enviar');
+            Route::get('/equipo/{equipo}/invitaciones-enviadas', 'invitacionesEnviadas')->name('invitaciones.enviadas');
+        });
+
         // Bitácora de Avances
         Route::controller(AvanceController::class)->group(function () {
             Route::get('/proyecto/bitacora', 'index')->name('avances.index');

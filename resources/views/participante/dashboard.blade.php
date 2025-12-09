@@ -10,6 +10,46 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
+            {{-- WIDGET DE INVITACIONES PENDIENTES --}}
+            @if($invitaciones_pendientes->isNotEmpty())
+                <div class="mb-6 bg-blue-50 dark:bg-blue-900/20 rounded-2xl border border-blue-200 dark:border-blue-800 p-6">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <h3 class="text-lg font-bold text-blue-900 dark:text-blue-300">
+                                    📧 Tienes {{ $invitaciones_pendientes->count() }} invitación{{ $invitaciones_pendientes->count() > 1 ? 'es' : '' }} pendiente{{ $invitaciones_pendientes->count() > 1 ? 's' : '' }}
+                                </h3>
+                            </div>
+                            <p class="text-sm text-blue-700 dark:text-blue-400 mb-4">
+                                Los líderes de equipos te han invitado a unirte a sus proyectos
+                            </p>
+                            <div class="space-y-2">
+                                @foreach($invitaciones_pendientes as $inv)
+                                    <div class="text-sm text-blue-800 dark:text-blue-300 flex items-center justify-between p-2 bg-white dark:bg-gray-800/50 rounded-lg">
+                                        <span>
+                                            <strong>{{ $inv->equipo->nombre }}</strong> 
+                                            <span class="text-gray-500 dark:text-gray-400">— invitación de <strong>{{ $inv->enviadaPor->user->name }}</strong></span>
+                                        </span>
+                                        @if($inv->perfilSugerido)
+                                            <span class="text-xs bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 px-2 py-1 rounded whitespace-nowrap">
+                                                {{ $inv->perfilSugerido->nombre }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <a href="{{ route('participante.invitaciones.mis') }}" 
+                           class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-lg transition whitespace-nowrap shadow-md">
+                            Ver todas
+                        </a>
+                    </div>
+                </div>
+            @endif
+
             @if ($equipo)
                 {{-- ... (El resto de la vista cuando el participante TIENE equipo) ... --}}
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">

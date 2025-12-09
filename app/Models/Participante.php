@@ -44,6 +44,16 @@ class Participante extends Model
         return $this->hasMany(SolicitudEquipo::class, 'respondida_por_participante_id');
     }
 
+    public function invitaciones()
+    {
+        return $this->hasMany(InvitacionEquipo::class);
+    }
+
+    public function invitacionesPendientes()
+    {
+        return $this->invitaciones()->where('estado', 'pendiente');
+    }
+
     public function esLiderDe()
     {
         return $this->equipos()
