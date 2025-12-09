@@ -63,7 +63,6 @@
                             <x-input-label for="descripcion" value="Descripción" class="mb-2 font-bold"/>
                             <textarea id="descripcion" name="descripcion" rows="4" 
                                 class="w-full rounded-xl border-gray-300 dark:bg-gray-900 dark:border-gray-600 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 shadow-sm p-4 text-sm leading-relaxed placeholder-gray-400 transition-all"
-                                required
                                 placeholder="Detalles sobre el evento...">{{ old('descripcion') }}</textarea>
                             <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
                         </div>

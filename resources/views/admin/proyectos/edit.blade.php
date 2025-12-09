@@ -64,7 +64,7 @@
                             <x-input-label for="descripcion" value="Descripción Detallada" class="mb-2 font-bold" />
                             <textarea name="descripcion" id="descripcion" rows="6"
                                 class="w-full rounded-xl border-gray-300 dark:bg-gray-900 dark:border-gray-600 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 shadow-sm p-4 text-sm leading-relaxed placeholder-gray-400"
-                                placeholder="Describe el objetivo, alcance y tecnologías del proyecto...">{{ old('descripcion', $proyecto->descripcion) }}</textarea>
+                                required placeholder="Describe el objetivo, alcance y tecnologías del proyecto...">{{ old('descripcion', $proyecto->descripcion) }}</textarea>
                             <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
                         </div>
 
